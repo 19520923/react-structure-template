@@ -1,0 +1,47 @@
+import { forwardRef } from "react";
+import PropTypes from "prop-types";
+import ButtonRoot from "./ButtonRoot";
+
+const Button = forwardRef(
+  ({ color, variant, size, circular, iconOnly, children, ...rest }, ref) => (
+    <ButtonRoot
+      {...rest}
+      ref={ref}
+      color="primary"
+      variant="contained"
+      size={size}
+      ownerState={{ color, variant, size, circular, iconOnly }}
+    >
+      {children}
+    </ButtonRoot>
+  )
+);
+
+Button.defaultProps = {
+  size: "medium",
+  variant: "contained",
+  color: "white",
+  circular: false,
+  iconOnly: false,
+};
+
+Button.propTypes = {
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  variant: PropTypes.oneOf(["text", "contained", "outlined"]),
+  color: PropTypes.oneOf([
+    "white",
+    "primary",
+    "secondary",
+    "info",
+    "success",
+    "warning",
+    "error",
+    "light",
+    "dark",
+  ]),
+  circular: PropTypes.bool,
+  iconOnly: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+
+export default Button;
